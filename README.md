@@ -32,7 +32,7 @@ config:
   4. ip domain-name ${domain}
   <br> domain -> название домена
   6. crypto key generate rsa
-      2048 // Для использования SSH - 1.9
+      <br> 2048 // Для использования SSH - 1.9
   5. line vty 0 4
 <br>5.1. transport input {ssh/all/telnet}
 <br>5.2. login local
