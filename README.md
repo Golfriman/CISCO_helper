@@ -6,7 +6,7 @@
 4. Использование Telnet
 5. Настройка EIGRP
 6. Настройка OSPF
-7. Настройка Агрегирования 
+7. Настройка Агрегирования (PAgP, LAсP, Static)
 8. Настройка DHCP
 9. Настройка SVI
 10. Настройка HSRP
@@ -14,7 +14,12 @@
 12. Настройка PVST + Rapid-PVST
 13. Настройка Port-Security
 14. Настройка Spanning-tree
-15. 
+15. Начальная подготовка для использования IPv6 на маршрутизаторе
+16. Как сделать EUI64?
+17. Настройка EIGRP_v6(EIGRP с использованием IPv6)
+18. Настройка OSPF_v6 (OSPF с использованием IPv6)
+19. Настройка DHCP_v6
+20. Настройка NAT-PT
 ## Предупреждение
 ${VARIABLE} -> переменная
 
@@ -35,6 +40,8 @@ config:
       * all - использование ssh и telnet
       * telnet - использование только telnet
    6. username ${USERNAME} privilege {0-15} secret ${PASSWORD}
+   <br> USERNAME -> логин
+   <br> PASSWORD -> пароль от SSH
    </br> Подсказка: 
         * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
         * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
@@ -43,9 +50,11 @@ config:
 
  ## Использование SSH
  
+ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
  
  ## Использование Telnet
  
+ telnet ${IP_ADDRESS_DEVICES}
  
  ## Настройка EIGRP
   1. router eigrp ${PROCCESS_ID}
