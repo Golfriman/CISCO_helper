@@ -87,15 +87,17 @@ config:
   2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {desirable/auto}
     * Если на одной стороне было установлено **auto**, необходимо прописать **desirable**
     * Если на одной стороне было установлено **desirable**, можно прописать либо **desirable**, либо **auto**
-    ### Настройка LAcP
+
+  ### Настройка LAcP
   1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
   2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}
     * Если на одной стороне было установлено **passive**, необходимо прописать **active**
     * Если на одной стороне было установлено **active**, можно прописать либо **passive**, либо **active**
-    ### Настройка Static
+
+  ### Настройка Static
   1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
   2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode on
-    * **ВАЖНО** *ВСЕ ОСНОВНЫЕ ПАРАМЕТРЫ НА ФИЗИЧЕСКИХ ИНТРЕФЕЙСАХ ДОЛЖНЫ СОВПАДАТЬ(SPEED, DUPLEX)*
+  * **ВАЖНО** *ВСЕ ОСНОВНЫЕ ПАРАМЕТРЫ НА ФИЗИЧЕСКИХ ИНТРЕФЕЙСАХ ДОЛЖНЫ СОВПАДАТЬ(SPEED, DUPLEX)*
   
   ##  <p name =8>Настройка DHCP</p>
   <br>config
