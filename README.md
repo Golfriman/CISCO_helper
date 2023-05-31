@@ -66,28 +66,46 @@ config:
   2. no auto-summary
   3. network ${IP_ADDRESS} ${WILD_CARD_MASK}
   4. passive-interface ${INT}
+
+
   ##  <p name =6>Настройка OSPF </p>
   1. router ospf ${LOCAL_ID}
   2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
-  *3. default-information originate*
+  3. *default-information originate* // Если сеть указывает на маршрут по умолчанию
+
+
   ##  <p name =7>Настройка Агрегирования </p>
   <br>config: 
-    * ip range ${TYPE_INTERFACES}${BEGIN}-${END}
-    * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
+  * ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+  * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
     <br>TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...
     <br>BEGIN -> интерфейс с которого необходимо начать
     <br>END -> интерфейс на котором надо закончить
-    <br> Пример команды: ip range f0/1-24
+    <br>Пример команды: ip range f0/1-24
+    ### Настройка PAgP
+    1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+    2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {desirable/auto}
+    * Если на одной стороне было установлено **auto**, необходимо прописать **desirable**
+    * Если на одной стороне было установлено **desirable**, можно прописать либо **desirable**, либо **auto**
+    ### Настройка LAcP
+    1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+    2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}
+    * Если на одной стороне было установлено **passive**, необходимо прописать **active**
+    * Если на одной стороне было установлено **active**, можно прописать либо **passive**, либо **active**
+    ### Настройка Static
+    1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+    2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode on
+    * **ВАЖНО** *ВСЕ ОСНОВНЫЕ ПАРАМЕТРЫ НА ФИЗИЧЕСКИХ ИНТРЕФЕЙСАХ ДОЛЖНЫ СОВПАДАТЬ(SPEED, DUPLEX)*
   
   ##  <p name =8>Настройка DHCP</p>
-  <br>config:
-    * ip dhcp pool ${NAME_DHCP_POOL}
+  <br>config
+  * ip dhcp pool ${NAME_DHCP_POOL}
     <br> dhcp:
-        * network ${IP_ADDRESS_POOL} ${MASK}
-        * default-router ${IP_DEFAULT_GETWAY}
-        * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
+   network ${IP_ADDRESS_POOL} ${MASK}
+  * default-router ${IP_DEFAULT_GETWAY}
+  * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
     <br>
-      * ip dhcp excluded-address ${IP_ADDRESS_POOL}
+      - ip dhcp excluded-address ${IP_ADDRESS_POOL}
   
   
   ##  <p name =9>Настройка SVI  </p>
