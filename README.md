@@ -116,8 +116,8 @@ config:
   
   ##  <p name =9>Настройка SVI  </p>
   <br>config:
-    * int vlan ${ID_VLAN}
-    * ip address ${IP_ADDRESS} ${MASK}
+  * int vlan ${ID_VLAN}
+  * ip address ${IP_ADDRESS} ${MASK}
   
   ##  <p name =10>Настройка HSRP</p>
   <br> config:
