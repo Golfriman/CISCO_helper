@@ -120,10 +120,10 @@ config:
     * ip address ${IP_ADDRESS} ${MASK}
   
   ##  <p name =10>Настройка HSRP</p>
-    <br> config:
-     *int vlan ...*:
-     * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
-     * standby ${ID_STANDBY_GROUP} priority ${NUM}
-     * standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
+  <br> config:
+  *int vlan ...*:
+  * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
+  * standby ${ID_STANDBY_GROUP} priority ${NUM}
+  * standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
   
   
