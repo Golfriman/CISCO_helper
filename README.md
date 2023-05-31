@@ -1,32 +1,32 @@
 # CISCO_helper
 ## Содержание
-1. <a href=1>Предупреждение</a>
-2. <a href=2>Начальная настройка</a>
-3. <a href=3>Использование SSH</a>
-4. <a href=4>Использование Telnet</a>
-5. <a href=5>Настройка EIGRP</a>
-6. <a href=6>Настройка OSPF</a>
-7. <a href=7>Настройка Агрегирования (PAgP, LAсP, Static)</a>
-8. <a href=8>Настройка DHCP</a>
-9. <a href=9>Настройка SVI</a>
-10. <a href=10>Настройка HSRP</a>
-11. <a href=11>Настройка VPN</a>
-12. <a href=12>Настройка PVST + Rapid-PVST</a>
-13. <a href=13>Настройка Port-Security</a>
-14. <a href=14>Настройка Spanning-tree</a>
-15. <a href=15>Начальная подготовка для использования IPv6 на маршрутизаторе</a>
-16. <a href=16>Как сделать EUI64?</a>
-17. <a href=17>Настройка EIGRP_v6(EIGRP с использованием IPv6)</a>
-18. <a href=18>Настройка OSPF_v6 (OSPF с использованием IPv6)</a>
-19. <a href=19>Настройка DHCP_v6</a>
-20. <a href=20>Настройка NAT-PT</a>
+1. <a href=#1>Предупреждение</a>
+2. <a href=#2>Начальная настройка</a>
+3. <a href=#3>Использование SSH</a>
+4. <a href=#4>Использование Telnet</a>
+5. <a href=#5>Настройка EIGRP</a>
+6. <a href=#6>Настройка OSPF</a>
+7. <a href=#7>Настройка Агрегирования (PAgP, LAсP, Static)</a>
+8. <a href=#8>Настройка DHCP</a>
+9. <a href=#9>Настройка SVI</a>
+10. <a href=#10>Настройка HSRP</a>
+11. <a href=#11>Настройка VPN</a>
+12. <a href=#12>Настройка PVST + Rapid-PVST</a>
+13. <a href=#13>Настройка Port-Security</a>
+14. <a href=#14>Настройка Spanning-tree</a>
+15. <a href=#15>Начальная подготовка для использования IPv6 на маршрутизаторе</a>
+16. <a href=#16>Как сделать EUI64?</a>
+17. <a href=#17>Настройка EIGRP_v6(EIGRP с использованием IPv6)</a>
+18. <a href=#18>Настройка OSPF_v6 (OSPF с использованием IPv6)</a>
+19. <a href=#19>Настройка DHCP_v6</a>
+20. <a href=#20>Настройка NAT-PT</a>
 
 
-## <a href=#1>Предупреждение </a>
+## <p name =1>Предупреждение </p>
 ${VARIABLE} -> переменная
 
 
-## <a href=#2>Начальная настройка </a>
+## <p name =2>Начальная настройка </p>
 config:
   1. no ip domain-lookup
   2. hostname ${Device}
@@ -50,29 +50,29 @@ config:
         * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
 
 
- ##  <a href=#3>Использование SSH</a>
+ ##  <p name =3>Использование SSH</p>
  
  ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
  
- ##  <a href=#4>Использование Telnet</a>
+ ##  <p name =4>Использование Telnet</p>
  
  telnet ${IP_ADDRESS_DEVICES}
  
- ##  <a href=#5>Настройка EIGRP </a>
+ ##  <p name =5>Настройка EIGRP </p>
   1. router eigrp ${PROCCESS_ID}
   2. no auto-summary
   3. network ${IP_ADDRESS} ${WILD_CARD_MASK}
   4. passive-interface ${INT}
-  ##  <a href=#6>Настройка OSPF </a>
+  ##  <p name =6>Настройка OSPF </p>
   1. router ospf ${LOCAL_ID}
   2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
   *3. default-information originate*
-  ##  <a href=#8>Настройка Агрегирования </a>
+  ##  <p name =8>Настройка Агрегирования </p>
   
-  ##  <a href=#9>Настройка DHCP </a>
+  ##  <p name =9>Настройка DHCP </p>
   
-  ##  <a href=#10>Настройка SVI  </a>
+  ##  <p name =10>Настройка SVI  </p>
   
-  ##  <a href=#11>Настройка HSRP  </a>
+  ##  <p name =11>Настройка HSRP  </p>
   
   
