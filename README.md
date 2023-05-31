@@ -67,12 +67,12 @@ config:
   1. router ospf ${LOCAL_ID}
   2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
   *3. default-information originate*
-  ##  <p name =8>Настройка Агрегирования </p>
+  ##  <p name =7>Настройка Агрегирования </p>
   
-  ##  <p name =9>Настройка DHCP </p>
+  ##  <p name =8>Настройка DHCP </p>
   
-  ##  <p name =10>Настройка SVI  </p>
+  ##  <p name =9>Настройка SVI  </p>
   
-  ##  <p name =11>Настройка HSRP  </p>
+  ##  <p name =10>Настройка HSRP  </p>
   
   
