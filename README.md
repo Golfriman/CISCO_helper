@@ -53,10 +53,13 @@ config:
  ##  <p name =3>Использование SSH</p>
  
  ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
+ * USERNAME - логин
+ * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
  ##  <p name =4>Использование Telnet</p>
  
  telnet ${IP_ADDRESS_DEVICES}
+ * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
  ##  <p name =5>Настройка EIGRP </p>
   1. router eigrp ${PROCCESS_ID}
@@ -68,11 +71,35 @@ config:
   2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
   *3. default-information originate*
   ##  <p name =7>Настройка Агрегирования </p>
+  <br>config: 
+    * ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+    * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
+    <br>TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...
+    <br>BEGIN -> интерфейс с которого необходимо начать
+    <br>END -> интерфейс на котором надо закончить
+    <br> Пример команды: ip range f0/1-24
   
-  ##  <p name =8>Настройка DHCP </p>
+  ##  <p name =8>Настройка DHCP</p>
+  <br>config:
+    * ip dhcp pool ${NAME_DHCP_POOL}
+    <br> dhcp:
+        * network ${IP_ADDRESS_POOL} ${MASK}
+        * default-router ${IP_DEFAULT_GETWAY}
+        * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
+    <br>
+      * ip dhcp excluded-address ${IP_ADDRESS_POOL}
+  
   
   ##  <p name =9>Настройка SVI  </p>
+  <br>config:
+    * int vlan ${ID_VLAN}
+    * ip address ${IP_ADDRESS} ${MASK}
   
-  ##  <p name =10>Настройка HSRP  </p>
+  ##  <p name =10>Настройка HSRP</p>
+    <br> config:
+     *int vlan ...*:
+     * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
+     * standby ${ID_STANDBY_GROUP} priority ${NUM}
+     * standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
   
   
