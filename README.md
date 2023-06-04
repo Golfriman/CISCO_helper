@@ -76,29 +76,29 @@ config:
 
   ##  <p name =7>Настройка Агрегирования </p>
   <br>config: 
-  * ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+  * int range ${TYPE_INTERFACES}${BEGIN}-${END}
   * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
     <br>TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...
     <br>BEGIN -> интерфейс с которого необходимо начать
     <br>END -> интерфейс на котором надо закончить
-    <br>Пример команды: ip range f0/1-24
+    <br>Пример команды: int range f0/1-24
 
   ### Настройка PAgP (Port Aggregation Protocol)
-  1. необходимо зайти на интерфейсы: <br> ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+  1. необходимо зайти на интерфейсы: <br> int range ${TYPE_INTERFACES}${BEGIN}-${END}
   2. необходимо прописать channel-group: <br> channel-group ${ID_GROUP} mode {desirable/auto}
   
   <br> Если на одной стороне было установлено **auto**, необходимо прописать **desirable**
   <br> Если на одной стороне было установлено **desirable**, можно прописать либо **desirable**, либо **auto**
 
   ### Настройка LAcP (Link Aggregation control Protocol)
-  1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+  1. необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}
   2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}
   
   <br> Если на одной стороне было установлено **passive**, необходимо прописать **active**
   <br> Если на одной стороне было установлено **active**, можно прописать либо **passive**, либо **active**
 
   ### Настройка Static
-  1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+  1. необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}
   2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode on
 
   **ВАЖНО** *ВСЕ ОСНОВНЫЕ ПАРАМЕТРЫ НА ФИЗИЧЕСКИХ ИНТРЕФЕЙСАХ ДОЛЖНЫ СОВПАДАТЬ(SPEED, DUPLEX)*
