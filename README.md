@@ -83,14 +83,14 @@ config:
     <br>END -> интерфейс на котором надо закончить
     <br>Пример команды: ip range f0/1-24
 
-  ### Настройка PAgP
-  1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
-  2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {desirable/auto}
+  ### Настройка PAgP (Port Aggregation Protocol)
+  1. необходимо зайти на интерфейсы: <br> ip range ${TYPE_INTERFACES}${BEGIN}-${END}
+  2. необходимо прописать channel-group: <br> channel-group ${ID_GROUP} mode {desirable/auto}
   
   <br> Если на одной стороне было установлено **auto**, необходимо прописать **desirable**
   <br> Если на одной стороне было установлено **desirable**, можно прописать либо **desirable**, либо **auto**
 
-  ### Настройка LAcP
+  ### Настройка LAcP (Link Aggregation control Protocol)
   1. необходимо зайти на интерфейсы: ip range ${TYPE_INTERFACES}${BEGIN}-${END}
   2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}
   
@@ -125,5 +125,16 @@ config:
   * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
   * standby ${ID_STANDBY_GROUP} priority ${NUM}
   * standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
+
+  ## <p name=11>Настройка VPN</p>
+  <br> config:
+  * int tunnel ${NUM_INT}
+  * ip addr ${IP_ADDR} ${MASK}
+  * tunnel mode gre ip
+  * tunnel destination ${IP_DESTIONATION}
+  * tunnel source ${TYPE_INTERFACES/IP_ADDR}
+  
+  ## <p name=12>Настройка PVST + Rapid-PVST</p>
+  Для того чтобы настраивать немного теории. PVST -> это Per vlan STP, т.е. это говорит о том, что для каждого VLAN строится своя STP ветка. По умолчанию всего один STP для всех VLAN по протколу STP(то есть выбирается самый наименьший мак адресс). А чтобы сделать PVST надо нащ
   
   
