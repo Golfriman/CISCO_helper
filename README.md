@@ -23,7 +23,10 @@
 
 
 ## <p name =1>Предупреждение </p>
-${VARIABLE} -> переменная
+* ${...} -> переменная
+* {.../...} -> выбор обязательного варианта
+* config -> настройка конфигурационного файла
+* config-if -> настройка интерфейса
 
 
 ## <p name =2>Начальная настройка </p>
@@ -143,17 +146,31 @@ config:
   * Чтобы поменять PVST на Rapid-PVST необходимо задать следующую команду:
   <br><code cisco>config: spanning-tree mode rapid-pvst</code>
   
-  <p name=13>Настройка Port-Security</p>
+  ## <p name=13>Настройка Port-Security</p>
   <br>config:
   * int  ${TYPE_INTERFACES}${BEGIN}
   * switchport port-security
   * switchport port-security mac-address {sticky / ${MAC_ADDRESS}}
-  - sticky -> принимает автоматически значение MAC_ADDRESS устройства, который подклчен по данному порту
-  - ${MAC_ADDRESS} -> статический MAC ADDRESS, который необходимо самому ввести
+  1. sticky -> принимает автоматически значение MAC_ADDRESS устройства, который подклчен по данному порту
+  2. ${MAC_ADDRESS} -> статический MAC ADDRESS, который необходимо самому ввести
   * switchport port-security maximum ${NUM}
   * switchport port-security violation ${TYPE}
   <br> ${TYPE}:
-  - protect - ...
-  - restrict - ...
-  - shutdown - ...
+  1. protect - ...
+  2. restrict - ...
+  3. shutdown - ...
+  ## <p name=14>Настройка Spanning-tree</p>
+  По факту тут все команды относящиеся к spanning-tree. К примеру это рассматривалось при настройке PVST.
+  <br> Но также необходимо рассматривать следующие команды:
+  1. Настройка типов соединения между комутаторами. 
+  * config-if: spanning-tree link-type ${TYPE}
+    * ${TYPE}: 
+      * point-to-point
+      * shared
+  2. Настройка bpduguard.
+  * config-if: spanning-tree bpduguard ${STATUS}
+    * ${STATUS} -> disable/enable
+  3. Настройка portfast
+  * config-if: spanning-tree portfast ${STATUS}
+    * ${STATUS} -> disable/trunk
   
