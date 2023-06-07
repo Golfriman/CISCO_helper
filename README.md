@@ -135,6 +135,25 @@ config:
   * tunnel source ${TYPE_INTERFACES/IP_ADDR}
   
   ## <p name=12>Настройка PVST + Rapid-PVST</p>
-  Для того чтобы настраивать немного теории. PVST -> это Per vlan STP, т.е. это говорит о том, что для каждого VLAN строится своя STP ветка. По умолчанию всего один STP для всех VLAN по протколу STP(то есть выбирается самый наименьший мак адресс). А чтобы сделать PVST надо нащ
+  Для того чтобы настраивать немного теории.
+  * PVST -> это Per vlan STP, т.е. это говорит о том, что для каждого VLAN строится своя STP ветка.
+  * По умолчанию всего один STP для всех VLAN по протколу STP(то есть выбирается самый наименьший мак адресс). 
+  Чтобы управлять STP веткой, необходимо задавать приоритет для определенного коммутатора (SWITCH).
+  <br><code cisco>config: spanning-tree vlan ${ID_VLAN} root primary</code>
+  * Чтобы поменять PVST на Rapid-PVST необходимо задать следующую команду:
+  <br><code cisco>config: spanning-tree mode rapid-pvst</code>
   
+  <p name=13>Настройка Port-Security</p>
+  <br>config:
+  * int  ${TYPE_INTERFACES}${BEGIN}
+  * switchport port-security
+  * switchport port-security mac-address {sticky / ${MAC_ADDRESS}}
+  - sticky -> принимает автоматически значение MAC_ADDRESS устройства, который подклчен по данному порту
+  - ${MAC_ADDRESS} -> статический MAC ADDRESS, который необходимо самому ввести
+  * switchport port-security maximum ${NUM}
+  * switchport port-security violation ${TYPE}
+  <br> ${TYPE}:
+  - protect - ...
+  - restrict - ...
+  - shutdown - ...
   
