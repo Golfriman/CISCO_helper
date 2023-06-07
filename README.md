@@ -33,24 +33,24 @@
 config:
   1. no ip domain-lookup
   2. hostname ${Device}
-  <br> Device -> название устройства
+      * Device -> название устройства
   4. ip domain-name ${domain}
   <br> domain -> название домена
   6. crypto key generate rsa
-      <br> 2048 // Для использования SSH - 1.9
+      * 2048 // Для использования SSH - 1.9
   5. line vty 0 4
-<br>5.1. transport input {ssh/all/telnet}
-<br>5.2. login local
-      * ssh - использование ssh
-      * all - использование ssh и telnet
-      * telnet - использование только telnet
+      <br>5.1. transport input {ssh/all/telnet}
+      <br>5.2. login local
+        * ssh - использование ssh
+        * all - использование ssh и telnet
+        * telnet - использование только telnet
    6. username ${USERNAME} privilege {0-15} secret ${PASSWORD}
-   <br> USERNAME -> логин
-   <br> PASSWORD -> пароль от SSH
-   </br> Подсказка: 
-        * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
-        * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
-        * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
+       * USERNAME -> логин
+       * PASSWORD -> пароль от SSH
+         * Подсказка: 
+           * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
+           * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
+           * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
 
 
  ##  <p name =3>Использование SSH</p>
@@ -81,9 +81,9 @@ config:
   <br>config: 
   * int range ${TYPE_INTERFACES}${BEGIN}-${END}
   * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
-    <br>TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...
-    <br>BEGIN -> интерфейс с которого необходимо начать
-    <br>END -> интерфейс на котором надо закончить
+      * TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...
+      * BEGIN -> интерфейс с которого необходимо начать
+      * END -> интерфейс на котором надо закончить
     <br>Пример команды: int range f0/1-24
 
   ### Настройка PAgP (Port Aggregation Protocol)
@@ -159,6 +159,7 @@ config:
   1. protect - ...
   2. restrict - ...
   3. shutdown - ...
+
   ## <p name=14>Настройка Spanning-tree</p>
   По факту тут все команды относящиеся к spanning-tree. К примеру это рассматривалось при настройке PVST.
   <br> Но также необходимо рассматривать следующие команды:
@@ -174,3 +175,9 @@ config:
   * config-if: spanning-tree portfast ${STATUS}
     * ${STATUS} -> disable/trunk
   
+  ## <p name=15>Начальная подготовка для использования IPv6 на маршрутизаторе</p>
+  config:
+  * ipv6 unicast-routing
+  Без этой команды не будут работать большиинство команд IPv6
+  ## <p name=16>Как сделать EUI64?</p>
+  Берем MAC-адрес источника...
