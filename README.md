@@ -117,10 +117,15 @@ config:
   * ip dhcp pool ${NAME_DHCP_POOL}
     <br> dhcp:
    network ${IP_ADDRESS_POOL} ${MASK}
-  * default-router ${IP_DEFAULT_GETWAY}
+  * default-router ${IP_DEFAULT_GATEWAY}
   * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
     <br>
-      - ip dhcp excluded-address ${IP_ADDRESS_POOL}
+      - ip dhcp excluded-address ${IP_ADDRESS_STATIC}
+          * NAME_DHCP_POOL    -> название POOL адресов, по которому потом будет присвоение
+          * IP_ADDRESS_POOL   ->  пространство сети, которое будет раздавать
+          * MASK              -> обычная маска, которая делает что обычно
+          * IP_DEFAULT_GATEWAY-> IP шлюза по умолчанию
+          * IP_DNS_SERVER     -> IP DNS сервера
   
   
   ##  <p name =9>Настройка SVI  </p>
@@ -141,7 +146,7 @@ config:
   * ip addr ${IP_ADDR} ${MASK}
   * tunnel mode gre ip
   * tunnel destination ${IP_DESTIONATION}
-  * tunnel source ${TYPE_INTERFACES/IP_ADDR}
+  * tunnel source {${TYPE_INTERFACES}/${IP_ADDR}}
   
   ## <p name=12>Настройка PVST + Rapid-PVST</p>
   Для того чтобы настраивать немного теории.
