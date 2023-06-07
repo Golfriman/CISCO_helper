@@ -115,12 +115,13 @@ config:
   ##  <p name =8>Настройка DHCP</p>
   <br>config
   * ip dhcp pool ${NAME_DHCP_POOL}
-    <br> dhcp:
-   network ${IP_ADDRESS_POOL} ${MASK}
-  * default-router ${IP_DEFAULT_GATEWAY}
-  * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
-    <br>
-      - ip dhcp excluded-address ${IP_ADDRESS_STATIC}
+  <br>dhcp:
+      * network ${IP_ADDRESS_POOL} ${MASK}
+      * default-router ${IP_DEFAULT_GATEWAY}
+      * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
+   <br>config:
+   * ip dhcp excluded-address ${IP_ADDRESS_STATIC}
+       * Объяснения:
           * NAME_DHCP_POOL    -> название POOL адресов, по которому потом будет присвоение
           * IP_ADDRESS_POOL   ->  пространство сети, которое будет раздавать
           * MASK              -> обычная маска, которая делает что обычно
