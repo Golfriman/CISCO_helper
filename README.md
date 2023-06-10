@@ -133,7 +133,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
         <ul>
           <li>Объяснения:
            <ul>
-             <li>NAME_DHCP_POOL    -> название POOL адресов, по которому потом будет присвоение
+           <li>NAME_DHCP_POOL    -> название POOL адресов, по которому потом будет присвоение
            <li>IP_ADDRESS_POOL   ->  пространство сети, которое будет раздавать
            <li>MASK              -> обычная маска, которая делает что обычно
            <li>IP_DEFAULT_GATEWAY-> IP шлюза по умолчанию
@@ -189,7 +189,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <li> switchport port-security
   <li> switchport port-security mac-address {sticky / ${MAC_ADDRESS}}
   <ul>
-  <ol>
+  <ol type="1">
   <li> sticky -> принимает автоматически значение MAC_ADDRESS устройства, который подклчен по данному порту
   <li> ${MAC_ADDRESS} -> статический MAC ADDRESS, который необходимо самому ввести
   </ol>
@@ -198,11 +198,12 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <li> switchport port-security violation ${TYPE}
   </ul>
   <br> ${TYPE}:
-  <ol>
-   <li>protect - ...
+  <ol type="1">
+   <li> protect - ...
    <li> restrict - ...
    <li> shutdown - ...
  </ol>
+ </ul>
 
 <h2 name=14>Настройка Spanning-tree</h2>
   По факту тут все команды относящиеся к spanning-tree. К примеру это рассматривалось при настройке PVST.
