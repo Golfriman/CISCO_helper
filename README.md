@@ -56,18 +56,18 @@ config:
            * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
            * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
            * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
- ## <p name =3>Использование SSH</p>
+## <p name =3>Использование SSH</p>
  
  ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
  * USERNAME - логин
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
- ## <p name =4>Использование Telnet</p>
+## <p name =4>Использование Telnet</p>
  
  telnet ${IP_ADDRESS_DEVICES}
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
- ## <p name =5>Настройка EIGRP </p>
+## <p name =5>Настройка EIGRP </p>
   1. router eigrp ${PROCCESS_ID}
   2. no auto-summary
   3. network ${IP_ADDRESS} ${WILD_CARD_MASK}
@@ -75,13 +75,13 @@ config:
       * ***ВАЖНО*** необходимо чтобы PROCESS_ID совпадал между другими устройствами, которые участвуют в протоколе адаптивной маршрутизации
 
 
-  ## <p name =6>Настройка OSPF </p>
+ ## <p name =6>Настройка OSPF </p>
   1. router ospf ${LOCAL_ID}
   2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
   3. *default-information originate* // Если сеть указывает на маршрут по умолчанию
 
 
-  ## <p name =7>Настройка Агрегирования </p>
+ ## <p name =7>Настройка Агрегирования </p>
   <br>config: 
   * int range ${TYPE_INTERFACES}${BEGIN}-${END}
   * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
@@ -127,19 +127,19 @@ config:
            * IP_ADDRESS_STATIC -> IP, который не должен раздавать DNS-server
   
   
-  ## <p name =9>Настройка SVI  </p>
+## <p name =9>Настройка SVI  </p>
   <br>config:
   * int vlan ${ID_VLAN}
   * ip address ${IP_ADDRESS} ${MASK}
   
-  ## <p name =10>Настройка HSRP</p>
+## <p name =10>Настройка HSRP</p>
   <br> config:
   *int vlan ...*:
   * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
   * standby ${ID_STANDBY_GROUP} priority ${NUM}
   * standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
 
-  ## <p name=11>Настройка VPN</p>
+## <p name=11>Настройка VPN</p>
   <br> config:
   * int tunnel ${NUM_INT}
   * ip addr ${IP_ADDR} ${MASK}
@@ -147,7 +147,7 @@ config:
   * tunnel destination ${IP_DESTIONATION}
   * tunnel source {${TYPE_INTERFACES}/${IP_ADDR}}
   
-  ## <p name=12>Настройка PVST + Rapid-PVST</p>
+## <p name=12>Настройка PVST + Rapid-PVST</p>
   Для того чтобы настраивать немного теории.
   * PVST -> это Per vlan STP, т.е. это говорит о том, что для каждого VLAN строится своя STP ветка.
   * По умолчанию всего один STP для всех VLAN по протколу STP(то есть выбирается самый наименьший мак адресс). 
@@ -156,7 +156,7 @@ config:
   * Чтобы поменять PVST на Rapid-PVST необходимо задать следующую команду:
   <br><code cisco>config: spanning-tree mode rapid-pvst</code>
   
-  ## <p name=13>Настройка Port-Security</p>
+## <p name=13>Настройка Port-Security</p>
   <br>config:
   * int  ${TYPE_INTERFACES}${BEGIN}
   * switchport port-security
@@ -170,7 +170,7 @@ config:
   2. restrict - ...
   3. shutdown - ...
 
-  ## <p name=14>Настройка Spanning-tree</p>
+## <p name=14>Настройка Spanning-tree</p>
   По факту тут все команды относящиеся к spanning-tree. К примеру это рассматривалось при настройке PVST.
   <br> Но также необходимо рассматривать следующие команды:
   1. Настройка типов соединения между комутаторами. 
@@ -185,11 +185,11 @@ config:
   * config-if: spanning-tree portfast ${STATUS}
     * ${STATUS} -> disable/trunk
   
-  ## <p name=15>Начальная подготовка для использования IPv6 на маршрутизаторе</p>
+## <p name=15>Начальная подготовка для использования IPv6 на маршрутизаторе</p>
   config:
   * ipv6 unicast-routing
   <br> Без этой команды не будут работать большиинство команд IPv6
-  ## <p name=16>Как сделать EUI64?</p>
+## <p name=16>Как сделать EUI64?</p>
   1. Берем MAC-адрес конечного узла (00E0.B072.39B4) 
   2. Разрезаем мак адрес пополам: [00E0.B0] [72.39B4]
   3. Вставляем FF:FE между двумя частями получаем 00E0:B0FF:FE72:39B4
@@ -198,11 +198,12 @@ config:
   Example
   MAC: AAAA.BBBB.CCCC
   AAAA:BBFF:FEBB:CCCC
-
-      5 6 7 8
-  A = 1 0 1 0 => 1000
-  
-  A8AA:BBFF:FEBB:CCCC
+   ║
+   V   5 6 7 8
+   A = 1 0 1 0 => 1000 = 8
+                         ║
+                         V
+                        A8AA:BBFF:FEBB:CCCC
   ```
   5. Остальные 64 бита IPv6 адреса необходимо брать из варианта
-  * В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4
+  * В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4, где ХХХХ:XXXX:XXXX:XXXX часть задается по условиям задания.
