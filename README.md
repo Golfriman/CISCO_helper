@@ -32,168 +32,218 @@
 * {...-...} -> выбор обязательного варианта из диапозона
 * config -> настройка конфигурационного файла
 * config-if -> настройка интерфейса
-
-
 ## <p name =2>Начальная настройка </p>
 config:
-  1. no ip domain-lookup
-  2. hostname ${Device}
-      * Device -> название устройства
-  4. ip domain-name ${domain}
-  <br> domain -> название домена
-  6. crypto key generate rsa
-      * 2048 // Для использования SSH - 1.9
-  5. line vty 0 4
-      <br>5.1. transport input {ssh/all/telnet}
-      <br>5.2. login local
-        * ssh - использование ssh
-        * all - использование ssh и telnet
-        * telnet - использование только telnet
-   6. username ${USERNAME} privilege {0-15} secret ${PASSWORD}
-       * USERNAME -> логин
-       * PASSWORD -> пароль от SSH
-         * Подсказка: 
+1. no ip domain-lookup
+2. hostname ${Device}
+  * Device -> название устройства
+4. ip domain-name ${domain}
+  * domain -> название домена
+6. crypto key generate rsa
+  * 2048 // Для использования SSH - 1.9
+5. line vty 0 4
+  <br>5.1. transport input {ssh/all/telnet}
+  <br>5.2. login local
+    * ssh - использование ssh
+    * all - использование ssh и telnet
+    * telnet - использование только telnet
+6. username ${USERNAME} privilege {0-15} secret ${PASSWORD}
+   * USERNAME -> логин
+   * PASSWORD -> пароль от SSH
+     * Подсказка: 
            * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
            * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
            * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
-## <p name =3>Использование SSH</p>
+
+<h2 name =3>Использование SSH</h2>
+ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
+  <ul>
+  <li>USERNAME - логин</li>
+  <li>IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение</li>
+  </ul>
  
- ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
- * USERNAME - логин
- * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
- 
-## <p name =4>Использование Telnet</p>
+## <h2 name =4>Использование Telnet</h2>
  
  telnet ${IP_ADDRESS_DEVICES}
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
-## <p name =5>Настройка EIGRP </p>
-  1. router eigrp ${PROCCESS_ID}
-  2. no auto-summary
-  3. network ${IP_ADDRESS} ${WILD_CARD_MASK}
-  4. passive-interface ${INT}
-      * ***ВАЖНО*** необходимо чтобы PROCESS_ID совпадал между другими устройствами, которые участвуют в протоколе адаптивной маршрутизации
+<h2 name =5>Настройка EIGRP </h2>
+  <ol>
+  <li> router eigrp ${PROCCESS_ID}</li>
+  <li> no auto-summary </li>
+  <li> network ${IP_ADDRESS} ${WILD_CARD_MASK} </li>
+  <li>passive-interface ${INT}</li>
+  </ol>
+      <ul><li> <b><i>ВАЖНО</i></b> необходимо чтобы PROCESS_ID совпадал между другими устройствами, которые участвуют в протоколе адаптивной маршрутизации </li></ul>
+
+<h2 name =6>Настройка OSPF </h2>
+  <ol>
+  <li>router ospf ${LOCAL_ID}</li>
+  <li>network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}</li>
+  <li><b>default-information originate</b> // Если сеть указывает на маршрут по умолчанию</li>
+  </ol>
 
 
- ## <p name =6>Настройка OSPF </p>
-  1. router ospf ${LOCAL_ID}
-  2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
-  3. *default-information originate* // Если сеть указывает на маршрут по умолчанию
-
-
- ## <p name =7>Настройка Агрегирования </p>
+ <h2 name =7>Настройка Агрегирования </h2>
   <br>config: 
-  * int range ${TYPE_INTERFACES}${BEGIN}-${END}
-  * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
-      * TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...
-      * BEGIN -> интерфейс с которого необходимо начать
-      * END -> интерфейс на котором надо закончить
+  <ul> 
+  <li>int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
+  <li>channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}</li>
+      <ul>
+         <li> TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...</li>
+         <li> BEGIN -> интерфейс с которого необходимо начать </li>
+         <li> END -> интерфейс на котором надо закончить </li>
+      </ul>
+  </ul>
     <br>Пример команды: int range f0/1-24
 
   ### Настройка PAgP (Port Aggregation Protocol)
-  1. необходимо зайти на интерфейсы: <br> int range ${TYPE_INTERFACES}${BEGIN}-${END}
-  2. необходимо прописать channel-group: <br> channel-group ${ID_GROUP} mode {desirable/auto}
-  
+  <ol>
+  <li> необходимо зайти на интерфейсы: <br> int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
+  <li>необходимо прописать channel-group: <br> channel-group ${ID_GROUP} mode {desirable/auto}</li>
+  </ol>
   <br> Если на одной стороне было установлено **auto**, необходимо прописать **desirable**
   <br> Если на одной стороне было установлено **desirable**, можно прописать либо **desirable**, либо **auto**
 
   ### Настройка LAcP (Link Aggregation control Protocol)
-  1. необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}
-  2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}
-  
+  <ol>
+  <li>необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
+  <li>необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}</li>
+  </ol>
   <br> Если на одной стороне было установлено **passive**, необходимо прописать **active**
   <br> Если на одной стороне было установлено **active**, можно прописать либо **passive**, либо **active**
 
   ### Настройка Static
-  1. необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}
-  2. необходимо прописать channel-group: channel-group ${ID_GROUP} mode on
-
+  <ol>
+  <li>необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
+  <li>необходимо прописать channel-group: channel-group ${ID_GROUP} mode on</li>
+  </ol>
   **ВАЖНО** *ВСЕ ОСНОВНЫЕ ПАРАМЕТРЫ НА ФИЗИЧЕСКИХ ИНТРЕФЕЙСАХ ДОЛЖНЫ СОВПАДАТЬ(SPEED, DUPLEX)*
   
-  ##  <p name =8>Настройка DHCP</p>
+  <h2 name =8>Настройка DHCP</h2>
   <br>config
-  * ip dhcp excluded-address ${IP_ADDRESS_STATIC}
-  * ip dhcp pool ${NAME_DHCP_POOL}
+  <ul> 
+  <li>ip dhcp excluded-address ${IP_ADDRESS_STATIC}
+  <li>ip dhcp pool ${NAME_DHCP_POOL}
   <br>dhcp:
-      * network ${IP_ADDRESS_POOL} ${MASK}
-      * default-router ${IP_DEFAULT_GATEWAY}
-      * dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
-        * Объяснения:
-           * NAME_DHCP_POOL    -> название POOL адресов, по которому потом будет присвоение
-           * IP_ADDRESS_POOL   ->  пространство сети, которое будет раздавать
-           * MASK              -> обычная маска, которая делает что обычно
-           * IP_DEFAULT_GATEWAY-> IP шлюза по умолчанию
-           * IP_DNS_SERVER     -> IP DNS сервера
-           * IP_ADDRESS_STATIC -> IP, который не должен раздавать DNS-server
+      <ul>
+      <li>network ${IP_ADDRESS_POOL} ${MASK}
+      <li>default-router ${IP_DEFAULT_GATEWAY}
+      <li>dns-server ${IP_DNS_SERVER} // Может быть что-то другое, но смысл остается таким же
+        <ul>
+          <li>Объяснения:
+           <ul>
+             <li>NAME_DHCP_POOL    -> название POOL адресов, по которому потом будет присвоение
+           <li>IP_ADDRESS_POOL   ->  пространство сети, которое будет раздавать
+           <li>MASK              -> обычная маска, которая делает что обычно
+           <li>IP_DEFAULT_GATEWAY-> IP шлюза по умолчанию
+           <li>IP_DNS_SERVER     -> IP DNS сервера
+           <li>IP_ADDRESS_STATIC -> IP, который не должен раздавать DNS-server
+            </ul>
+        </ul>
+    </ul>
+    </ul>
   
   
-## <p name =9>Настройка SVI  </p>
+<h2 name =9>Настройка SVI  </h2>
   <br>config:
-  * int vlan ${ID_VLAN}
-  * ip address ${IP_ADDRESS} ${MASK}
+  <ul>
+  <li>int vlan ${ID_VLAN}
+  <li>ip address ${IP_ADDRESS} ${MASK}
+  </ul>
   
-## <p name =10>Настройка HSRP</p>
+<h2 name =10>Настройка HSRP</h2>
   <br> config:
   *int vlan ...*:
-  * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
-  * standby ${ID_STANDBY_GROUP} priority ${NUM}
-  * standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
+  <ul>
+  <li>standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
+  <li>standby ${ID_STANDBY_GROUP} priority ${NUM}
+  <li>standby ${ID_STANDBY_GROUP} preemt // Если необходимо указать
+  </ul>
 
-## <p name=11>Настройка VPN</p>
+<h2 name=11>Настройка VPN</h2>
   <br> config:
-  * int tunnel ${NUM_INT}
-  * ip addr ${IP_ADDR} ${MASK}
-  * tunnel mode gre ip
-  * tunnel destination ${IP_DESTIONATION}
-  * tunnel source {${TYPE_INTERFACES}/${IP_ADDR}}
+  <ul>
+  <li> int tunnel ${NUM_INT}
+  <li> ip addr ${IP_ADDR} ${MASK}
+  <li> tunnel mode gre ip
+  <li> tunnel destination ${IP_DESTIONATION}
+  <li> tunnel source {${TYPE_INTERFACES}/${IP_ADDR}}
+  </ul>
   
-## <p name=12>Настройка PVST + Rapid-PVST</p>
+<h2 name=12>Настройка PVST + Rapid-PVST</h2>
   Для того чтобы настраивать немного теории.
-  * PVST -> это Per vlan STP, т.е. это говорит о том, что для каждого VLAN строится своя STP ветка.
-  * По умолчанию всего один STP для всех VLAN по протколу STP(то есть выбирается самый наименьший мак адресс). 
+  <ul>
+  <li>PVST -> это Per vlan STP, т.е. это говорит о том, что для каждого VLAN строится своя STP ветка.
+  <li> По умолчанию всего один STP для всех VLAN по протколу STP(то есть выбирается самый наименьший мак адресс). 
+  </ul>
   Чтобы управлять STP веткой, необходимо задавать приоритет для определенного коммутатора (SWITCH).
   <br><code cisco>config: spanning-tree vlan ${ID_VLAN} root primary</code>
-  * Чтобы поменять PVST на Rapid-PVST необходимо задать следующую команду:
+  <ul><li> Чтобы поменять PVST на Rapid-PVST необходимо задать следующую команду:</ul>
   <br><code cisco>config: spanning-tree mode rapid-pvst</code>
   
-## <p name=13>Настройка Port-Security</p>
+<h2 name=13>Настройка Port-Security</h2>
   <br>config:
-  * int  ${TYPE_INTERFACES}${BEGIN}
-  * switchport port-security
-  * switchport port-security mac-address {sticky / ${MAC_ADDRESS}}
-  1. sticky -> принимает автоматически значение MAC_ADDRESS устройства, который подклчен по данному порту
-  2. ${MAC_ADDRESS} -> статический MAC ADDRESS, который необходимо самому ввести
-  * switchport port-security maximum ${NUM}
-  * switchport port-security violation ${TYPE}
+  <ul>
+  <li> int  ${TYPE_INTERFACES}${BEGIN}
+  <li> switchport port-security
+  <li> switchport port-security mac-address {sticky / ${MAC_ADDRESS}}
+  <ul>
+  <ol>
+  <li> sticky -> принимает автоматически значение MAC_ADDRESS устройства, который подклчен по данному порту
+  <li> ${MAC_ADDRESS} -> статический MAC ADDRESS, который необходимо самому ввести
+  </ol>
+  <ul>
+  <li> switchport port-security maximum ${NUM}
+  <li> switchport port-security violation ${TYPE}
+  </ul>
   <br> ${TYPE}:
-  1. protect - ...
-  2. restrict - ...
-  3. shutdown - ...
+  <ol>
+   <li>protect - ...
+   <li> restrict - ...
+   <li> shutdown - ...
+ </ol>
 
-## <p name=14>Настройка Spanning-tree</p>
+<h2 name=14>Настройка Spanning-tree</h2>
   По факту тут все команды относящиеся к spanning-tree. К примеру это рассматривалось при настройке PVST.
   <br> Но также необходимо рассматривать следующие команды:
-  1. Настройка типов соединения между комутаторами. 
-  * config-if: spanning-tree link-type ${TYPE}
-    * ${TYPE}: 
-      * point-to-point
-      * shared
-  2. Настройка bpduguard.
-  * config-if: spanning-tree bpduguard ${STATUS}
-    * ${STATUS} -> disable/enable
-  3. Настройка portfast
-  * config-if: spanning-tree portfast ${STATUS}
-    * ${STATUS} -> disable/trunk
+  <ol>
+  <li>Настройка типов соединения между комутаторами. 
+  <ul> config-if: spanning-tree link-type ${TYPE}
+    <li>${TYPE}: 
+    <ul>
+    <li> point-to-point
+     <li> shared
+      </ul>
+    </ul>
+  <li> Настройка bpduguard.
+  <ul>
+    <li> config-if: spanning-tree bpduguard ${STATUS}
+    <ul>
+      <li> ${STATUS} -> disable/enable
+      </ul>
+    </ul>
+  <li> Настройка portfast
+  <ul> 
+    <li> config-if: spanning-tree portfast ${STATUS}
+    <ul>
+      <li> ${STATUS} -> disable/trunk
+      </ul>
+    </ul>
+    </ol>
   
-## <p name=15>Начальная подготовка для использования IPv6 на маршрутизаторе</p>
+<h2 name=15>Начальная подготовка для использования IPv6 на маршрутизаторе</h2>
   config:
-  * ipv6 unicast-routing
-  <br> Без этой команды не будут работать большиинство команд IPv6
-## <p name=16>Как сделать EUI64?</p>
-  1. Берем MAC-адрес конечного узла (00E0.B072.39B4) 
-  2. Разрезаем мак адрес пополам: [00E0.B0] [72.39B4]
-  3. Вставляем FF:FE между двумя частями получаем 00E0:B0FF:FE72:39B4
-  4. 7 бит начиная слева необходимо инвертировать то есть получаем: 02E0:B0FF:FE72:39B4
+  <ul> 
+    <li> ipv6 unicast-routing
+  </ul>
+<br> Без этой команды не будут работать большиинство команд IPv6
+<h2 name=16>Как сделать EUI64?</h2>
+  <ol>
+    <li> Берем MAC-адрес конечного узла (00E0.B072.39B4) 
+  <li> Разрезаем мак адрес пополам: [00E0.B0] [72.39B4]
+  <li> Вставляем FF:FE между двумя частями получаем 00E0:B0FF:FE72:39B4
+  <li> 7 бит начиная слева необходимо инвертировать то есть получаем: 02E0:B0FF:FE72:39B4
   ```
   Example
   MAC: AAAA.BBBB.CCCC
@@ -205,5 +255,6 @@ config:
                          V
                         A8AA:BBFF:FEBB:CCCC
   ```
-  5. Остальные 64 бита IPv6 адреса необходимо брать из варианта
-  * В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4, где ХХХХ:XXXX:XXXX:XXXX часть задается по условиям задания.
+  <li> Остальные 64 бита IPv6 адреса необходимо брать из варианта
+  </ol>
+  <ul> <li>В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4, где ХХХХ:XXXX:XXXX:XXXX часть задается по условиям задания. </ul>
