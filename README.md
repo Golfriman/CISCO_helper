@@ -56,8 +56,6 @@ config:
            * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
            * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
            * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
-
-
  ## <p name =3>Использование SSH</p>
  
  ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
