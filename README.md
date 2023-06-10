@@ -58,18 +58,18 @@ config:
            * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
 
 
- ##  <p name =3>Использование SSH</p>
+ ## <p name =3>Использование SSH</p>
  
  ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}
  * USERNAME - логин
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
- ##  <p name =4>Использование Telnet</p>
+ ## <p name =4>Использование Telnet</p>
  
  telnet ${IP_ADDRESS_DEVICES}
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
- ##  <p name =5>Настройка EIGRP </p>
+ ## <p name =5>Настройка EIGRP </p>
   1. router eigrp ${PROCCESS_ID}
   2. no auto-summary
   3. network ${IP_ADDRESS} ${WILD_CARD_MASK}
@@ -77,13 +77,13 @@ config:
       * ***ВАЖНО*** необходимо чтобы PROCESS_ID совпадал между другими устройствами, которые участвуют в протоколе адаптивной маршрутизации
 
 
-  ##  <p name =6>Настройка OSPF </p>
+  ## <p name =6>Настройка OSPF </p>
   1. router ospf ${LOCAL_ID}
   2. network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}
   3. *default-information originate* // Если сеть указывает на маршрут по умолчанию
 
 
-  ##  <p name =7>Настройка Агрегирования </p>
+  ## <p name =7>Настройка Агрегирования </p>
   <br>config: 
   * int range ${TYPE_INTERFACES}${BEGIN}-${END}
   * channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}
@@ -129,12 +129,12 @@ config:
            * IP_ADDRESS_STATIC -> IP, который не должен раздавать DNS-server
   
   
-  ##  <p name =9>Настройка SVI  </p>
+  ## <p name =9>Настройка SVI  </p>
   <br>config:
   * int vlan ${ID_VLAN}
   * ip address ${IP_ADDRESS} ${MASK}
   
-  ##  <p name =10>Настройка HSRP</p>
+  ## <p name =10>Настройка HSRP</p>
   <br> config:
   *int vlan ...*:
   * standby ${ID_STANDBY_GROUP} ip ${IP_VIRTUAL_DEFAULT_GATEWAY}
