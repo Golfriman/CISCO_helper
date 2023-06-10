@@ -48,12 +48,17 @@ config:
     * all - использование ssh и telnet
     * telnet - использование только telnet
 6. username ${USERNAME} privilege {0-15} secret ${PASSWORD}
-   * USERNAME -> логин
-   * PASSWORD -> пароль от SSH
-     * Подсказка: 
-           * privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
-           * privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
-           * privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
+  <ul> 
+  <li>USERNAME -> логин
+  <li>PASSWORD -> пароль от SSH
+   <ul> <li>Подсказка: 
+           <ul>
+         <li>privilege level 0 — это команды disable, enable, exit, help и logout, которые работают во всех режимах
+         <li>privilege level 1 — Это команды пользовательского режима, то есть как только вы попадаете на циску и увидите приглашение Router> вы имеете уровень 1.
+         <li>privilege level 15 — Это команды привилегированного режима, вроде, как root в Unix'ах
+        </ul>
+          </ul>
+   </ul>
 
 <h2 name =3>Использование SSH</h2>
 ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
@@ -102,16 +107,16 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <li> необходимо зайти на интерфейсы: <br> int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
   <li>необходимо прописать channel-group: <br> channel-group ${ID_GROUP} mode {desirable/auto}</li>
   </ol>
-  <br> Если на одной стороне было установлено **auto**, необходимо прописать **desirable**
-  <br> Если на одной стороне было установлено **desirable**, можно прописать либо **desirable**, либо **auto**
+  <br> Если на одной стороне было установлено <b>auto</b>, необходимо прописать <b>desirable</b>
+  <br> Если на одной стороне было установлено <b>desirable</b>, можно прописать либо <b>desirable</b>, либо <b>auto</b>
 
   ### Настройка LAcP (Link Aggregation control Protocol)
   <ol>
   <li>необходимо зайти на интерфейсы: int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
   <li>необходимо прописать channel-group: channel-group ${ID_GROUP} mode {passive/active}</li>
   </ol>
-  <br> Если на одной стороне было установлено **passive**, необходимо прописать **active**
-  <br> Если на одной стороне было установлено **active**, можно прописать либо **passive**, либо **active**
+  <br> Если на одной стороне было установлено <b>passive</b>, необходимо прописать <b>active</b>
+  <br> Если на одной стороне было установлено <b>active</b>, можно прописать либо <b>passive</b>, либо <b>active</b>
 
   ### Настройка Static
   <ol>
