@@ -268,14 +268,18 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <ul> <li>В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4, где ХХХХ:XXXX:XXXX:XXXX часть задается по условиям задания. </ul>
 
    <h2 name=17>Настройка EIGRP_v6(EIGRP с использованием IPv6)</h2>
-   config: ipv6 router eigrp ${ID_PROCCESS}
+   config: ipv6 router eigrp ${ID_PROCESS}
    <ul>
    <li>no shut
-   <li>eigrp router-id A.B.C.D //Если нет IPv4 адреса на 
+   <li>eigrp router-id A.B.C.D //Если нет IPv4 на интерфейсах нет ни одного заданного IPv4 адреса
    </ul>
    <br>config:
    <ul>
    <ul><li><i>Необходимо приделать ко всем интерфейсам, которые участвуют в протоколе EIGRP</i></li></ul>
    <li>int ${TYPE_INTERFACES}${BEGIN}
-   <li>ipv6 eigrp ${ID_PROCCESS}
+   <li>ipv6 eigrp ${ID_PROCESS}
    </ul>
+   <h2 name=18>Настройка OSPF_v6 (OSPF с использованием IPv6)</h2>
+   config: ipv6 router ospf ${ID_PROCESS}
+   <ul>
+   <li>router-id A.B.C.D //Если нет IPv4 на интерфейсах нет ни одного заданного IPv4 адреса
