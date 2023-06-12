@@ -274,8 +274,8 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
    Vㅤ 5 6 7 8<br>
    A = 1 0 1 0 => 1000 = 8<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ║<br>
-   ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤV<br>
-   ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ A8AA:BBFF:FEBB:CCCC<br>
+   ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤV<br>
+   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ A8AA:BBFF:FEBB:CCCC<br>
   
   <ul> <li>В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4, где ХХХХ:XXXX:XXXX:XXXX часть задается по условиям задания. </ul>
 
