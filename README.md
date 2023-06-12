@@ -76,30 +76,42 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
  
 <h2 name =5>Настройка EIGRP </h2>
   <ol>
-  <li> router eigrp ${PROCCESS_ID}</li>
+  <li> router eigrp ${PROCESS_ID}</li>
   <li> no auto-summary </li>
   <li> network ${IP_ADDRESS} ${WILD_CARD_MASK} </li>
   <li>passive-interface ${INT}</li>
   </ol>
-      <ul><li> <b><i>ВАЖНО</i></b> необходимо чтобы PROCESS_ID совпадал между другими устройствами, которые участвуют в протоколе адаптивной маршрутизации </li></ul>
-
+  <ul><li> <b><i>ВАЖНО</i></b> необходимо чтобы PROCESS_ID совпадал между другими устройствами, которые участвуют в протоколе адаптивной маршрутизации </li></ul>
+  <ul>
+  <li>PROCESS_ID      -> уникальный индетификатор процесса, который должен запускается единожды на устройстве
+  <li>IP_ADDRESS      -> адрес сети
+  <li>WILD_CARD_MASK  -> обратная маска
+  <li>INT             -> название интерфейса
+  </ul>
 <h2 name =6>Настройка OSPF </h2>
   <ol>
   <li>router ospf ${LOCAL_ID}</li>
   <li>network ${IP_ADDRESS} ${WILD_CARD_MASK} area ${NUMBER}</li>
   <li><b>default-information originate</b> // Если сеть указывает на маршрут по умолчанию</li>
   </ol>
+  <ul>
+  <li>LOCAL_ID       -> уникальный id, но имеет локальную значимость, т.е. на других устройствах можно записывать другой id
+  <li>IP_ADDRESS     -> адрес сети
+  <li>WILD_CARD_MASK -> обратная маска
+  <li>NUMBER         -> номер зоны, имеет важное значение в протоколе OSPF, изначально протокол OSPF работает внутри зоны 0
+  </ul>
 
 
  <h2 name =7>Настройка Агрегирования </h2>
   <br>config: 
   <ul> 
-  <li>int range ${TYPE_INTERFACES}${BEGIN}-${END}</li>
+  <li>int range ${TYPE_INTERFACES}{BEGIN-END}</li>
   <li>channel-group ${ID_GROUP} mode {active/passive/desirable/auto/on}</li>
       <ul>
          <li> TYPE_INTERFACES -> тип интерфейса которому идет подключение, например Gigabyte, FastEthernet...</li>
-         <li> BEGIN -> интерфейс с которого необходимо начать </li>
-         <li> END -> интерфейс на котором надо закончить </li>
+         <li> BEGIN           -> интерфейс с которого необходимо начать </li>
+         <li> END             -> интерфейс на котором надо закончить </li>
+         <li> ID_GROUP        -> id группы, которая агрегирует порты. Также должно совпадать с противоположной стороной???
       </ul>
   </ul>
     <br>Пример команды: int range f0/1-24
