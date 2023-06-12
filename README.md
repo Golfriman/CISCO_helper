@@ -274,7 +274,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   &ensp;║<br>
   &ensp;Vㅤ 5 6 7 8<br>
   &ensp;A = 1 0 1 0 => 1000 = 8<br>
-   ㅤㅤㅤㅤㅤㅤㅤㅤㅤ&ensp;ㅤ║<br>
+   ㅤㅤㅤㅤㅤㅤㅤㅤ&ensp;ㅤㅤ║<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤ&ensp;ㅤㅤV<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤ&ensp;ㅤ A8AA:BBFF:FEBB:CCCC<br>
   
@@ -323,7 +323,21 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
    </ul>
    </ul>
    <h2 name=20>Настройка NAT-PT</h2>
-   
+   config:
+   <ul>
+   <li> ipv6 nat prefix ${IPv6_ADDRESS}/96
+   <li> ipv6 nat ${CONVERT} source ${ADRESS} ${NEW_ADDRESS}
+   <li> interface ${INT} 
+   <ul>
+   <li> ipv6 nat
+   </ul>
+   </ul>
+   <ul>
+   <li>IPv6_ADDRESS -> адрес сети версии 6
+   <li> CONVERT -> v6v4 или v4v6
+   <li> ADDRESS -> адрес источника, который необходимо преобразовать в другой тип версии сети
+   <li> NEW_ADDRES -> новый адрес источника, другой версии сети. важно чтобы он не пересекался с другими IP адресами...
+   </ul>
    <h2 name=21>Редистрибьюция маршрутов</h2>
    <p><b>Теория:</b>Редистрибуция маршрутов (route redistribution) - это процесс передачи маршрутной информации из одного протокола маршрутизации в другой. Она позволяет объединить маршруты из разных протоколов маршрутизации и распространить их по всей сети.</p>
    <br>config-router(OSPF):
