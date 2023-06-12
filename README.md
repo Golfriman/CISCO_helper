@@ -266,17 +266,17 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <li> 7 бит начиная слева необходимо инвертировать то есть получаем: 02E0:B0FF:FE72:39B4
   <li> Остальные 64 бита IPv6 адреса необходимо брать из варианта
   </ol>
-  ```
-  Example
-  MAC: AAAA.BBBB.CCCC
+  <br>
+  Example<br>
+  MAC:ㅤAAAA.BBBB.CCCC<br>
   AAAA:BBFF:FEBB:CCCC
-   ║
-   V   5 6 7 8
-   A = 1 0 1 0 => 1000 = 8
-                         ║
-                         V
-                        A8AA:BBFF:FEBB:CCCC
-  ```
+   ║<br>
+   Vㅤ 5 6 7 8<br>
+   A = 1 0 1 0 => 1000 = 8<br>
+   ㅤㅤㅤㅤㅤㅤㅤ         ║<br>
+   ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤV<br>
+   ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ A8AA:BBFF:FEBB:CCCC<br>
+  
   <ul> <li>В итоге получается ХХХХ:XXXX:XXXX:XXXX:02E0:B0FF:FE72:39B4, где ХХХХ:XXXX:XXXX:XXXX часть задается по условиям задания. </ul>
 
    <h2 name=17>Настройка EIGRP_v6(EIGRP с использованием IPv6)</h2>
