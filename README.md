@@ -295,3 +295,5 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
    config: ipv6 router ospf ${ID_PROCESS}
    <ul>
    <li>router-id A.B.C.D //Если нет IPv4 на интерфейсах нет ни одного заданного IPv4 адреса
+   </ul>
+   <ul><li>Дальше также необходимо написать у интерфейса, какой протокол маршрутизации был использован(симот на протокол EIGRP_v6)</li></ul>
