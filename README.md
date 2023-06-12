@@ -272,7 +272,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   AAAA:BBFF:FEBB:CCCC<br>
   &ensp;║<br>
   &ensp;Vㅤ 5 6 7 8<br>
-   A = 1 0 1 0 => 1000 = 8<br>
+  &ensp;A = 1 0 1 0 => 1000 = 8<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ║<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤV<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤㅤ A8AA:BBFF:FEBB:CCCC<br>
