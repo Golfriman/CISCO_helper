@@ -264,7 +264,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <li> Разрезаем мак адрес пополам: [00E0.B0] [72.39B4]
   <li> Вставляем FF:FE между двумя частями получаем 00E0:B0FF:FE72:39B4
   <li> 7 бит начиная слева необходимо инвертировать то есть получаем: 02E0:B0FF:FE72:39B4
-  ```
+  <br>```
   Example
   MAC: AAAA.BBBB.CCCC
   AAAA:BBFF:FEBB:CCCC
