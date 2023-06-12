@@ -270,8 +270,8 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   Example<br>
   MAC:ㅤAAAA.BBBB.CCCC<br>
   AAAA:BBFF:FEBB:CCCC<br>
-   ║<br>
-   Vㅤ 5 6 7 8<br>
+   <p>&nbsp║</p>
+   <p>&nbsp Vㅤ 5 6 7 8</p>
    A = 1 0 1 0 => 1000 = 8<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ║<br>
    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤV<br>
