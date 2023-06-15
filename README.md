@@ -9,6 +9,7 @@
 6. <a href=#6>Настройка OSPF</a>
 7. <a href=#7>Настройка Агрегирования (PAgP, LAсP, Static)</a>
 8. <a href=#8>Настройка DHCP</a>
+8.1 <a href=#8.1>Маршрутизация на L3 Switch(3650, 3560) </a>
 9. <a href=#9>Настройка SVI</a>
 10. <a href=#10>Настройка HSRP</a>
 11. <a href=#11>Настройка VPN</a>
@@ -164,7 +165,8 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
     </ul>
     </ul>
   
-  
+<h2 name=8.1>Маршрутизация на L3 Switch </h2>
+config: ip routing
 <h2 name =9>Настройка SVI  </h2>
   <br>config:
   <ul>
