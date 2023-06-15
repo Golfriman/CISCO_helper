@@ -76,7 +76,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
  
 ## <h2 name =4>Использование Telnet</h2>
 <h3>Теория</h3>
-Telnet - протокол текстовой связи клиент-сервер без защиты через TCP/IP.
+Telnet - протокол текстовой связи через TCP/IP без защиты.
 <h3>Практика</h3>
  telnet ${IP_ADDRESS_DEVICES}
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
