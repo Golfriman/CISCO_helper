@@ -66,7 +66,7 @@ config:
 
 <h2 name =3>Использование SSH</h2>
 <h3>Теория</h3>
-Secure Shell протокол для защиты передаваемых данных между клиентом и сервером
+Secure Shell - протокол для защиты передаваемых данных между клиентом и сервером.
 <h3>Практика</h3>
 ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <ul>
@@ -75,11 +75,16 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   </ul>
  
 ## <h2 name =4>Использование Telnet</h2>
- 
+<h3>Теория</h3>
+Telnet - протокол текстовой связи клиент-сервер без защиты через TCP/IP.
+<h3>Практика</h3>
  telnet ${IP_ADDRESS_DEVICES}
  * IP_ADDRESS_DEVICES - ip интрефейса к которому идет подключение
  
 <h2 name =5>Настройка EIGRP </h2>
+<h3>Теория</h3>
+Enchanced Interior Gateway Routing Protocol - улучшенная версия IGRP. Основан на методе distance-vector и использует алгоритм Дейкстры для поиска наилучших маршрутов.
+<h3>Практика</h3>
   <ol>
   <li> router eigrp ${PROCESS_ID}</li>
   <li> no auto-summary </li>
@@ -93,6 +98,7 @@ ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <li>WILD_CARD_MASK  -> обратная маска
   <li>INT             -> название интерфейса
   </ul>
+  
 <h2 name =6>Настройка OSPF </h2>
   <ol>
   <li>router ospf ${LOCAL_ID}</li>
