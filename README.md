@@ -65,6 +65,9 @@ config:
    </ul>
 
 <h2 name =3>Использование SSH</h2>
+<h3>Теория</h3>
+Secure Shell протокол для защиты передаваемых данных между клиентом и сервером
+<h3>Практика</h3>
 ssh -l ${USERNAME} ${IP_ADDRESS_DEVICES}<br>
   <ul>
   <li>USERNAME - логин</li>
